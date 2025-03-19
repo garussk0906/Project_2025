@@ -154,16 +154,31 @@ pip install flask flask-sqlalchemy flask-login flask-wtf wtforms email-validator
 ### 9. Инструкция по запуску программы:
 
 1) Создать виртуальное окружение -
+    ```bash
     python -m venv venv
+
+    ```
 2) Запустить - 
+    ```bash
     .\venv\Scripts\activate
+    
+    ```
 3) Запустить команду, если есть проблема с политиками безопасности PowerShell, которые запрещают выполнение скриптов -
+    ```bash
     Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+    
+    ```
 3) В файле config.py заменить почту админа на свою
 4) Установить библиотеки из файла cd .\Booking_workplace\ - 
+    ```bash
     pip install -r requirements.txt
+    
+    ```
 5) Запустить код из файла app.py
+    ```bash
     python .\app.py
+    
+    ```
 6) В консоле указать пароль админа и подтвердить ( пароль должен иметь > 8 символом )
 7) Открыть localhost на port 5000
 
