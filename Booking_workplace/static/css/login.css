@@ -1,0 +1,186 @@
+/* Основные стили страницы */
+.fullscreen-login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f2efff;    
+    padding: 20px;
+}
+
+.branding {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.branding .logo {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.branding h1 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 440px;
+    transition: transform 0.3s ease;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Стили для полей ввода с floating labels */
+.form-group {
+    position: relative;
+}
+
+.floating-input {
+    width: 100%;
+    height: 56px;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: transparent;
+    z-index: 1;
+}
+
+.floating-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.floating-input:placeholder-shown + label {
+    transform: translateY(0);
+    font-size: 1rem;
+    color: #95a5a6;
+}
+
+.floating-input:not(:placeholder-shown) + label,
+.floating-input:focus + label {
+    transform: translateY(-140%) scale(0.9);
+    color: #3498db;
+    background: white;
+    padding: 0 4px;
+    margin-left: 4px;
+}
+
+.floating-input + label {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    transform-origin: left center;
+}
+
+/* Стили для кнопки входа */
+.auth-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+    background: #27ae60;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+.auth-button:active {
+    transform: translateY(0);
+}
+
+.auth-button svg {
+    stroke: white;
+}
+
+/* Стили для сообщения об ошибке */
+.error-notice {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: #fee;
+    border: 2px solid #fcc;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.error-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e74c3c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.error-content p {
+    color: #c0392b;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.error-content small {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.error-content a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+.error-content a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 24px;
+        border-radius: 12px;
+    }
+    
+    .branding h1 {
+        font-size: 1.25rem;
+    }
+    
+    .floating-input {
+        height: 48px;
+        font-size: 0.875rem;
+    }
+    
+    .auth-button {
+        padding: 14px;
+        font-size: 0.875rem;
+    }
+}

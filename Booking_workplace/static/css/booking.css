@@ -1,0 +1,109 @@
+ /* Общие стили */
+.booking-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+ /* Оформление таблицы) */
+.locations-table-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+ 
+.locations-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+/* Заголовки и ячейки таблицы */
+.locations-table th {
+    background: #f8f9fa;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.locations-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+}
+
+ /* Оформление строк таблицы */
+.location-row {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.location-row.active:hover {
+    background: #f8f9fa;
+}
+
+.location-row.inactive {
+    background: #fafafa;
+    cursor: not-allowed;
+}
+
+ /* Индикаторы статуса */
+.status-indicator {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-indicator.active {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-indicator.inactive {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+ /* Ссылки-действия */
+.action-link {
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.action-link:hover {
+    color: #1976D2;
+}
+
+.disabled-action {
+    color: #6c757d;
+    font-style: italic;
+}
+
+ /* Адаптивные стили (мобильная версия) */
+@media (max-width: 768px) {
+    .locations-table th,
+    .locations-table td {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .status-indicator {
+        font-size: 11px;
+    }
+}

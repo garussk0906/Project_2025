@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в систему</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <style>
+        /* Основные сбросы стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="fullscreen-login">
+        <div class="login-card">
+            <div class="branding">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Логотип" class="logo">
+                <h1>Booking Workplace</h1>
+            </div>
+
+            <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="login" 
+                        name="login" 
+                        required
+                        placeholder=" "
+                        class="floating-input">
+                    <label for="login">Логин</label>
+                </div>
+
+                <div class="form-group">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required
+                        placeholder=" "
+                        class="floating-input">
+                    <label for="password">Пароль</label>
+                </div>
+
+                <button type="submit" class="auth-button">
+                    <span>Войти в систему</span>
+                </button>
+
+                {% if error %}
+                <div class="error-notice">
+                    <div class="error-icon">!</div>
+                    <div class="error-content">
+                        <p>{{ error }}</p>
+                        <small>
+                            Для помощи обратитесь к администратору:
+                            <a href="mailto:{{ admin_email }}">{{ admin_email }}</a>
+                        </small>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>

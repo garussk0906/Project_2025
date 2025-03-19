@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/location.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="location-container">
+    <h2 class="location-title">{{ location.name_location }}</h2>
+    <!-- Кнопка возврата -->
+    <div class="back-section">
+        <a href="{{ url_for('booking') }}" class="back-btn">← Назад к локациям</a>
+    </div>
+
+    {# Подсчёт забронированных мест на выбранную дату #}
+    {% set ns = namespace(booked=0) %}
+    {% for seat in seats %}
+        {% if seat.bookings | selectattr('booking_date', 'eq', selected_date) | list | length > 0 %}
+            {% set ns.booked = ns.booked + 1 %}
+        {% endif %}
+    {% endfor %}
+    {% set available_count = location.seat_count - ns.booked %}
+
+    <!-- Информация о локации -->
+    <div class="location-info">
+        <div class="info-item">
+            <span class="info-label">Адрес:</span>
+            <span class="info-value">{{ location.address }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Всего мест:</span>
+            <span class="info-value">{{ location.seat_count }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Свободных мест:</span>
+            <span class="info-value">{{ available_count }}</span>
+        </div>
+    </div>
+
+    <!-- Переключатель дат -->
+    <div class="date-switcher">
+        <a href="{{ url_for('location_page', location_id=location.id, day='today') }}" 
+           class="date-btn {% if day == 'today' %}active{% endif %}">
+            Сегодня
+        </a>
+        <a href="{{ url_for('location_page', location_id=location.id, day='tomorrow') }}" 
+           class="date-btn {% if day == 'tomorrow' %}active{% endif %}">
+            Завтра
+        </a>
+    </div>
+
+    <!-- Вывод предупреждения, если у пользователя уже есть бронирование на выбранную дату -->
+    {% if day == 'today' and current_user.active_booking_today %}
+        <div class="alert alert-warning">
+            Есть забронированное место на эту дату!
+        </div>
+    {% elif day == 'tomorrow' and current_user.active_booking_tomorrow %}
+        <div class="alert alert-warning">
+            Есть забронированное место на эту дату!
+        </div>
+    {% endif %}
+
+    <!-- Таблица мест -->
+    <div class="seats-table-container">
+        <table class="seats-table">
+            <thead>
+                <tr>
+                    <th>Место</th>
+                    <th>Статус</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set user_booking = current_user.active_booking_today if day == 'today' else current_user.active_booking_tomorrow %}
+
+                {% for seat in seats %}
+                    {% set seat_booking = seat.bookings | selectattr('booking_date', 'eq', selected_date) | first %}
+                    <tr class="seat-row {% if seat_booking %}occupied{% endif %} 
+                        {% if user_booking and user_booking.seat_id != seat.id %}disabled{% endif %}">
+                        <td>№{{ seat.id }}</td>
+                        <td>
+                            {% if seat_booking %}
+                                {% if seat_booking.user_id == current_user.id %}
+                                    <span class="status-badge my-booking">Ваше место</span>
+                                {% else %}
+                                    <span class="status-badge occupied">
+                                        Занято: {{ seat_booking.user.login if seat_booking.user else 'Неизвестный пользователь' }}
+                                    </span>
+                                {% endif %}
+                            {% else %}
+                                <span class="status-badge available">Свободно</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if seat_booking %}
+                                {% if seat_booking.user_id == current_user.id %}
+                                    <form action="{{ url_for('cancel_booking') }}" method="post">
+                                        <input type="hidden" name="booking_id" value="{{ seat_booking.id }}">
+                                        <button type="submit" class="action-btn cancel-btn">Отменить</button>
+                                    </form>
+                                {% endif %}
+                            {% else %}
+                                {% if user_booking %}
+                                    {% if user_booking.seat_id == seat.id %}
+                                        <form action="{{ url_for('cancel_booking') }}" method="post">
+                                            <input type="hidden" name="booking_id" value="{{ user_booking.id }}">
+                                            <button type="submit" class="action-btn cancel-btn">Отменить</button>
+                                        </form>
+                                    {% else %}
+                                        
+                                    {% endif %}
+                                {% else %}
+                                    <form action="{{ url_for('book_seat', seat_id=seat.id) }}" method="post">
+                                        <input type="hidden" name="booking_date" value="{{ selected_date }}">
+                                        <button type="submit" class="action-btn book-btn">Забронировать</button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

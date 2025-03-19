@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+{% endblock %}
+<div class="booking-container">
+    <h2 class="page-title">Доступные локации</h2>
+    
+    <div class="locations-table-container">
+        <table class="locations-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Адрес</th>
+                    <th>Мест</th>
+                    <th>Статус</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in locations %}
+                <tr class="location-row {% if location.status == 'active' %}active{% else %}inactive{% endif %}"
+                    onclick="{% if location.status == 'active' %}window.location.href='{{ url_for('location_page', location_id=location.id) }}'{% endif %}">
+                    <td>{{ location.name_location }}</td>
+                    <td>{{ location.address }}</td>
+                    <td>{{ location.seat_count }}</td>
+                    <td>
+                        <span class="status-indicator {{ 'active' if location.status == 'active' else 'inactive' }}">
+                            {{ "Активна" if location.status == "active" else "Не активна" }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if location.status == 'active' %}
+                            <a href="{{ url_for('location_page', location_id=location.id) }}" class="action-link">Выбрать →</a>
+                        {% else %}
+                            <span class="disabled-action">Недоступно</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

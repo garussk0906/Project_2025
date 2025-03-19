@@ -1,0 +1,179 @@
+/* Основной контейнер админ-панели */
+.admin-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Заголовок страницы */
+.page-title {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Секции админа */
+.admin-section {
+    margin-bottom: 40px;
+}
+
+/* Форма создания (сетка форм) */
+.admin-form {
+    display: grid;
+    grid-template-columns: 1fr; /* один столбец */
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 50%;             /* ширина – половина страницы */
+    margin-left: 20px;      /* отступ от левой границы страницы */
+}
+
+.admin-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-form label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.admin-form input {
+    padding: 8px 12px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+/* Стили для таблиц (аналог booking) */
+.table-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.admin-table th {
+    background: #f8f9fa;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.admin-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+}
+
+/* Строки таблицы */
+.table-row {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.table-row:hover {
+    background: #f8f9fa;
+}
+
+.action-link-del {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    background-color: #9f0000;
+}
+
+.action-link-del:hover {
+    color: #ffffff;
+}
+
+.action-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    background-color: #059f00;
+}
+
+.action-link:hover {
+    color: #ffffff;
+}
+
+/* Ссылки для действий */
+.action-link-block {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    background-color: #059f00;
+}
+
+.action-link-block:hover {
+    color: #ffffff;
+}
+
+/* Ссылки для действий */
+.action-link-unblock {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    background-color: #ae0303
+}
+
+.action-link-unblock:hover {
+    color: #ffffff;
+}
+
+/* Кнопки действий (создания) */
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background: #2ecc71;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: #27ae60;
+}
+
+/* Секция возврата */
+.back-section {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.back-btn {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .admin-form {
+        grid-template-columns: 1fr;
+    }
+    .admin-table th,
+    .admin-table td {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
